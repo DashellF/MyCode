@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(){
-    int testCases;
-    cin >> testCases;
-    cin.ignore();
-    for(int testcase = 0; testcase < testCases; testcase++){
-    }
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    ifstream input("AdventOfCode/DayOne.txt");
+    
 }
