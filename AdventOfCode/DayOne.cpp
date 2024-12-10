@@ -6,5 +6,12 @@ int main() {
     cin.tie(NULL);
 
     ifstream input("AdventOfCode/DayOne.txt");
-    
+    string inputS;
+    while (getline(input, inputS))
+        int one, two;
+        istringstream line(inputS);
+        if (line >> one >> two){
+            
+        }
+    }
 }

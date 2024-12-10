@@ -13,38 +13,22 @@ int main() {
         cin.ignore();
 
         for (int i = 0; i < testCases; i++){
-                string input = "", x = "", y = "", z = "";
-                int xI, yI, zI = 0;
-                int k = 0;
-                getline(cin, input);
-                while(input.at(k) != ' '){
-                        x += input.substr(k, k+1);
-                        k++;
+                double x, y, z;
+                cin >> x >> y >> z;
+                cin.ignore();
+                x += 180;
+                y += 180;
+                z += 180;
+                if (x > 360){
+                        x -= 360;
                 }
-                k++;
-                while(input.at(k) != ' '){
-                        y += input.substr(k, k+1);
-                        k++;
+                if (y > 360){
+                        y -= 360;
                 }
-                k++;
-                z = input.substr(k);
-                xI = stoi(x);
-                yI = stoi(y);
-                zI = stoi(z);
-                                     
-                xI += 180;
-                yI += 180;
-                zI += 180;
-                if (xI > 360){
-                        xI -= 360;
+                if (z > 360){
+                        z -= 360;
                 }
-                if (yI > 360){
-                        yI -= 360;
-                }
-                if (zI > 360){
-                        zI -= 360;
-                }
-                cout << xI << " " << yI << " " << zI;
+                cout << x << " " << y << " " << z << "\n";
         }
         return 0;
 }

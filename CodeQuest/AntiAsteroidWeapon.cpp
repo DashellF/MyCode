@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 int main() {
         ios_base::sync_with_stdio(false);
         cin.tie(NULL);
@@ -22,6 +21,7 @@ int main() {
                 arr[i][0] = x;
                 arr[i][1] = y;
             }
+            //sort array
             int tempX, tempY;
             for (int t = 0; t < num-1; t++){
                 for (int j = 0; j < num-1; j++){         
