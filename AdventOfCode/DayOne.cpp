@@ -7,11 +7,11 @@ int main() {
 
     ifstream input("AdventOfCode/DayOne.txt");
     string inputS;
-    while (getline(input, inputS))
+    while (getline(input, inputS)){
         int one, two;
         istringstream line(inputS);
-        if (line >> one >> two){
+        // if (line >> one >> two){
             
-        }
+        // }
     }
 }
