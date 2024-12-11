@@ -56,8 +56,9 @@ int main(){
     //the logic
     int possibleZero = 0;
     int max = 0;
+    int numInfected[cows];
     for (int i = 0; i < cows; i++){
-        int numInfected[cows] = {0}; //number of times each cow passes along the infection
+        numInfected[cows] = {0}; //number of times each cow passes along the infection
         //create starting string
         string possibleInfection = "";
         for (int k = 0; k < i; k++){
