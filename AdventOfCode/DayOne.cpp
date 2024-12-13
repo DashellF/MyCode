@@ -5,24 +5,26 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int arr[1000];
-    int arrT[1000];
-    ifstream input("AdventOfCode/DayOne.txt");
+    vector<int> arr;
+    vector<int> arrT;
+    ifstream input("./DayOne.txt");
+    if (!input) cerr << "error file\n";
     string inputS;
     while (getline(input, inputS)){
-        int one, two, i = 0;
+        int one, two;
         istringstream line(inputS);
         if (line >> one >> two){
-            arr[i] = one;
-            arrT[i] = two;
-            cout << arr[i] << "\n";
-            cout << arrT[i] << "\n";
-            i++;
+            arr.push_back(one);
+            arrT.push_back(two);
+            //cout << arr << "\n";
+            //cout << arrT << "\n";
         }
     }
+    /*
+    cout << arr[0];
     int sub;
-    for (int i = 0; i < 1000 - 1; i++){
-        for (int k = 0; k < 1000 - 1; k++){
+    for (int i = 0; i < arr.size(); i++){
+        for (int k = 0; k < arr.size(); k++){
             if (arr[k] > arr[k+1]){
                 sub = arr[k];
                 arr[k] = arr[k+1];
@@ -35,9 +37,14 @@ int main() {
             }
         }
     }
+    */
+
+    sort(arr.begin(), arr.end());
+    sort(arrT.begin(), arrT.end());
+
     cout << "sorted!" << "\n";
     int output = 0;
-    for (int i = 0; i < 1000; i++){
+    for (int i = 0; i < arr.size(); i++){
         output += abs(arr[i] - arrT[i]);
     }
     cout << output << "\n";
