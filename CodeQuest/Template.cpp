@@ -11,13 +11,9 @@ int main() {
         cin >> n;
         cin.ignore();
 
-        for (int i = 0; i < n; i++) {
-                getOutput();
+        for (int q = 0; q < n; q++) {
+
         }
 
         return 0;
 }
-
-void getOutput() {
-    
-} 
