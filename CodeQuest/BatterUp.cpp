@@ -12,8 +12,7 @@ int main() {
         for (int u = 0; u < n; u++) {
             int bats = 0, singles = 0, doubles = 0, triples = 0, hr = 0;
             string input, name;
-            cin >> input;
-            cin.ignore();
+            getline(cin, input);
             name = input.substr(0,input.find(":"));
             while (input.find("1B") != string::npos){
                 singles++;
@@ -40,7 +39,7 @@ int main() {
                 input = input.substr(0, input.find("K")) + input.substr(input.find("K")+1);
             }
             double output = (singles + 2*doubles + 3*triples + 4*hr);
-            cout << fixed << setprecision(3) << name << "=" << output/bats << "\n";
+            cout << fixed << setprecision(3) << name << "=" << (output/bats) << "\n";
         }
         return 0;
 }
