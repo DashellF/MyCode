@@ -21,6 +21,7 @@ int main() {
                 if (isdigit(str.at(i))){
                     digit = (str.at(i) - '0');
                 }
+                
                 else {
                     digit = 10;
                 }
@@ -34,7 +35,7 @@ int main() {
             else {
                 check = 10;
             }
-            if ((11 - (temp % 11)) == check){
+            if ((11 - (temp % 11)) % 11 == check){
                 cout << "VALID" << "\n";
             }
             else {
