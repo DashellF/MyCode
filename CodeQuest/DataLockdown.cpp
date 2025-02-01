@@ -17,7 +17,7 @@ int main() {
                 string url;
                 int num;
                 cin >> url >> num;
-                if (url.length() < 8 || url.substr(url.length()-9) != ".lmco.com" && num > 999){
+                if (url.length() < 8 || url.substr(url.length()-9) != ".lmco.com" && num >= 1000){
                     cout << url << " " << num << "\n";
                 }
             }

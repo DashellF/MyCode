@@ -17,7 +17,7 @@ int main() {
 	return 0;
 }
 
-void printPair(pair<double, double> a) {
+void printPair(pair<double, double> &a) {
     if (abs(a.first) < 1e-9){
         a.first = 0.00;
     } 
