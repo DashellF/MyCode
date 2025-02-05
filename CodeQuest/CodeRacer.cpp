@@ -68,27 +68,43 @@ int main() {
             for (int i = 0; i < directions.length(); i++){
                 if (directions[i] == 'L'){
                     place--;
+                    //dont got through walls
+                    if (place < 1){
+                        place = 1;
+                    }
+                    if (place > width){
+                        place = width;
+                    }
+
+                    //if crash
+                    if (path[i+4][place] == "o"){
+                        path[i+4][place] = "X";
+                        lastline = i+5;
+                        break; 
+                    }
+                    else {
+                        path[i+4][place] = "v";
+                    }
                 }
-                else {
+                else if (directions[i] == 'R'){
                     place++;
-                }
+                    //dont got through walls
+                    if (place < 1){
+                        place = 1;
+                    }
+                    if (place > width){
+                        place = width;
+                    }
 
-                //dont got through walls
-                if (place < 1){
-                    place = 1;
-                }
-                if (place > width){
-                    place = width;
-                }
-
-                //if crash
-                if (path[i+4][place] == "o"){
-                    path[i+4][place] = "X";
-                    lastline = i+5;
-                    break; 
-                }
-                else {
-                    path[i+4][place] = "v";
+                    //if crash
+                    if (path[i+4][place] == "o"){
+                        path[i+4][place] = "X";
+                        lastline = i+5;
+                        break; 
+                    }
+                    else {
+                        path[i+4][place] = "v";
+                    }
                 }
             }
 
