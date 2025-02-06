@@ -26,6 +26,7 @@ int main() {
                 }
                 tindex++;
             }
+            lone.push_back(stod(one.substr(pindex)));
             pindex = 0;
             tindex = 0;
             while (two.length() > tindex){
@@ -35,6 +36,7 @@ int main() {
                 }
                 tindex++;
             }
+            ltwo.push_back(stod(two.substr(pindex)));
             int occurences = 0;
             string indexes = "";
             for (int i = 0; i < lone.size(); i++){
