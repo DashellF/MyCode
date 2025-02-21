@@ -11,7 +11,7 @@ int main() {
         cin >> n;
         cin.ignore();
         map<string,int> thing;
-        set<pair<string, int>> things;
+        string things = "";
 
         for (int q = 0; q < n; q++) {
             string link;
@@ -23,30 +23,19 @@ int main() {
                 }
                 temp = link[i] + temp;
             }
-
-            // Check if the domain extension already exists in the set
-            bool found = false;
-            for (auto it = things.begin(); it != things.end(); ++it) {
-                if (it->first == temp) {
-                    // If found, remove the old pair and insert a new one with an updated count
-                    int count = it->second;
-                    things.erase(it);
-                    things.insert({temp, count + 1});
-                    found = true;
-                    break;
-                }
+            if (things.find("." + temp + " ") == string::npos){
+                things += "." + temp + " ";
             }
-
-            // If the domain extension was not found, insert a new pair with count = 1
-            if (!found) {
-                things.insert({temp, 1});
+            thing[temp] = thing[temp] + 1;
+        }   
+        int period;
+        for (int i = 0; i < things.length(); i++){
+            if (things[i] == '.'){
+                period = i;
             }
-        
-
-                
-        }
-        for (auto &p : things) {
-            cout << p.first << " " << p.second << "\n";
+            if (things[i] == ' '){
+                cout << things.substr(period+1, i-period-1) << " " << thing[things.substr(period+1, i-period-1)] << "\n";
+            }
         }
         return 0;
 }

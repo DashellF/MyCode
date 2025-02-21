@@ -41,7 +41,7 @@ int main() {
                     break;
                 }
                 day++;
-            } 
+            }
             day = 31;
             for (int i = 0; i < 31; i++){
                 if (day + int(2.6*month-0.2) - 2*century + year + year/4 + century/4 == 1){
@@ -89,24 +89,194 @@ int main() {
             double UTC = orgtime - times[org];
             month = stoi(date.substr(5,2));
             day = stoi(date.substr(8,2));
-            if (org == "Sprey" && month >= 3 && month <= 11){
-                if (month == 3){
-                    if (day >= startSprey && stoi(time.substr(0,2)) >= 2){
+            // cout << (day + int(2.6*month-0.2) - 2*century + year + year/4 + century/4)%7;
+
+            if (org == "Sprey"){
+                if (month > 3 && month < 11){
+                    UTC--;
+                }
+                else if (month == 3){
+                    if (day > startSprey){
                         UTC--;
+                    }
+                    else if (day == startSprey){
+                        if (stoi(time.substr(0,2)) >= 2){
+                            UTC--;
+                        }
                     }
                 }
                 else if (month == 11){
-                    if (day == endsprey){
+                    if (day < endSprey){
                         UTC--;
+                    }
+                     else if (day == endSprey){
+                        if (stoi(time.substr(0,2)) < 2){
+                            UTC--;
+                        }
                     }
                 }
             }
+
+            else if (org == "Anderson"){
+                if (month > 3 && month < 10){
+                    UTC--;
+                }
+                else if (month == 3){
+                    if (day > startAnderson){
+                        UTC--;
+                    }
+                    else if (day == startAnderson){
+                        if (stoi(time.substr(0,2)) >= 1){
+                            UTC--;
+                        }
+                    }
+                }
+                else if (month == 10){
+                    if (day < endAnderson){
+                        UTC--;
+                    }
+                     else if (day == endAnderson){
+                        if (stoi(time.substr(0,2)) < 2){
+                            UTC--;
+                        }
+                    }
+                }
+            }
+
+            else if (org == "Thomas"){
+                if (month < 4 && month > 10){
+                    UTC--;
+                }
+                else if (month == 4){
+                    if (day < endThomas){
+                        UTC--;
+                    }
+                    else if (day == endThomas){
+                        if (stoi(time.substr(0,2)) < 3){
+                            UTC--;
+                        }
+                    }
+                }
+                else if (month == 10){
+                    if (day > startThomas){
+                        UTC--;
+                    }
+                     else if (day == startThomas){
+                        if (stoi(time.substr(0,2)) >= 2){
+                            UTC--;
+                        }
+                    }
+                }
+            }
+
             cout << org << "\'s meeting:\n";
             for (int i = 0; i < people.size(); i++){
                 double usertime = UTC + times[people[i]];
+                
+                if (people[i] == "Sprey"){
+                    if (month > 3 && month < 11){
+                        usertime--;
+                    }
+                    else if (month == 3){
+                        if (day > startSprey){
+                            usertime--;
+                        }
+                        else if (day == startSprey){
+                            if (stoi(time.substr(0,2)) >= 2){
+                                usertime--;
+                            }
+                        }
+                    }
+                    else if (month == 11){
+                        if (day < endSprey){
+                            usertime--;
+                        }
+                        else if (day == endSprey){
+                            if (stoi(time.substr(0,2)) < 2){
+                                usertime--;
+                            }
+                        }
+                    }
+                }
+
+                else if (people[i] == "Anderson"){
+                    if (month > 3 && month < 10){
+                        usertime--;
+                    }
+                    else if (month == 3){
+                        if (day > startAnderson){
+                            usertime--;
+                        }
+                        else if (day == startAnderson){
+                            if (stoi(time.substr(0,2)) >= 1){
+                                usertime--;
+                            }
+                        }
+                    }
+                    else if (month == 10){
+                        if (day < endAnderson){
+                            usertime--;
+                        }
+                        else if (day == endAnderson){
+                            if (stoi(time.substr(0,2)) < 2){
+                                usertime--;
+                            }
+                        }
+                    }
+                }
+
+                else if (people[i] == "Thomas"){
+                    if (month < 4 && month > 10){
+                        usertime--;
+                    }
+                    else if (month == 4){
+                        if (day < endThomas){
+                            usertime--;
+                        }
+                        else if (day == endThomas){
+                            if (stoi(time.substr(0,2)) < 3){
+                                usertime--;
+                            }
+                        }
+                    }
+                    else if (month == 10){
+                        if (day > startThomas){
+                            usertime--;
+                        }
+                        else if (day == startThomas){
+                            if (stoi(time.substr(0,2)) >= 2){
+                                usertime--;
+                            }
+                        }
+                    }
+                }
+                map<int, int> MonthDays = {{1,31},{2,28},{3,31},{4,30},{5,31},{6,30},{7,31},{8,31},{9,30},{10,31},{11,30},{12,31}};  
+                if (usertime > 24){
+                    usertime -= 24;
+                    day++;
+                    if (day > MonthDays[month]){
+                        month++;
+                        day = 1;
+                        if (month > 12){
+                            year++;
+                            month = 1;
+                        }
+                    }
+                }
                 string susertime = to_string(usertime);
+                if (susertime[1] ==  '.'){
+                    susertime = "0" + susertime;
+                }
+                string sday = to_string(day);
+                if (sday.length() == 1){
+                    sday = "0" + sday;
+                }
+                string smonth = to_string(month);
+                if (smonth.length() == 1){
+                    smonth = "0" + smonth;
+                }
                 susertime = susertime.substr(0,2) + ":" + susertime.substr(3,2);
-                cout << people[i] << " " << date << " " << susertime << "\n";
+                cout << people[i] << " " << year << '-' << smonth << '-' << sday << " " << susertime << "\n";
             }
         }
 
