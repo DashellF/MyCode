@@ -5,7 +5,7 @@ void getOutput();
 
 int main() {
         ios_base::sync_with_stdio(false);
-        // cin.tie(NULL);
+        cin.tie(NULL);
 
         int n;
         cin >> n;
@@ -18,8 +18,8 @@ int main() {
             map<int,int> data;
             int words = 0;
             int totalLength = 0;
-            int minLength = 1000000;
-            int maxLength = 0;
+            int minLength = INT_MAX;
+            int maxLength = -1;
             for (int w = 0; w < g; w++){
                 string line;
                 getline(cin, line);
@@ -48,7 +48,7 @@ int main() {
             cout << "Average: " << fixed << setprecision(1) << mean << "\n";
             string modes = "";
             int modeNum = 0;
-            int median;
+            double median;
             int other = 0;
             bool thing = true;
             for (int i = minLength; i < maxLength+1; i++){
@@ -61,8 +61,14 @@ int main() {
                     modes += (to_string(i) + ",");
                 }
                 if (other > words/2 && thing == true){
-                    median = i;
-                    thing = false;
+                    if (words % 2 == 1){
+                        median = i;
+                        thing = false;
+                    }
+                    else {
+                        median = (data[i] + data[i+1])/2;
+                        thing = false;
+                    }
                 }
             }
             cout << "Median: " << fixed << setprecision(1) << median << "\n"
