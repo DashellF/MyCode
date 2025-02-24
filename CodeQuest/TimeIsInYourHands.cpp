@@ -25,6 +25,8 @@ int main() {
             while (a >> temp){
                 people.push_back(temp);
             }
+            people.push_back(org);
+            sort(people.begin(), people.end());
             bool dst = false;
             int century, year, month, day;
             year = stod(date.substr(0,4));
@@ -36,7 +38,7 @@ int main() {
             year = year % 100;
             int startSprey, endSprey, startAnderson, endAnderson, startThomas, endThomas;
             for (int i = 0; i < 31; i++){
-                if (day + int(2.6*month-0.2) - 2*century + year + year/4 + century/4 == 1){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
                     startSprey = day + 7;
                     break;
                 }
@@ -44,7 +46,7 @@ int main() {
             }
             day = 31;
             for (int i = 0; i < 31; i++){
-                if (day + int(2.6*month-0.2) - 2*century + year + year/4 + century/4 == 1){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
                     startAnderson = day;
                     break;
                 }
@@ -53,7 +55,7 @@ int main() {
             month = 10;
             day = 1;
             for (int i = 0; i < 31; i++){
-                if (day + int(2.6*month-0.2) - 2*century + year + year/4 + century/4 == 1){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
                     startThomas = day;
                     break;
                 }
@@ -61,7 +63,7 @@ int main() {
             } 
             day = 31;
             for (int i = 0; i < 31; i++){
-                if (day + int(2.6*month-0.2) - 2*century + year + year/4 + century/4 == 1){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
                     endAnderson = day;
                     break;
                 }
@@ -70,7 +72,7 @@ int main() {
             month = 11;
             day = 31;
             for (int i = 0; i < 31; i++){
-                if (day + int(2.6*month-0.2) - 2*century + year + year/4 + century/4 == 1){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
                     endSprey = day;
                     break;
                 }
@@ -79,7 +81,7 @@ int main() {
             month = 4;
             day = 1;
             for (int i = 0; i < 31; i++){
-                if (day + int(2.6*month-0.2) - 2*century + year + year/4 + century/4 == 1){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
                     endThomas = day;
                     break;
                 }
@@ -89,7 +91,7 @@ int main() {
             double UTC = orgtime - times[org];
             month = stoi(date.substr(5,2));
             day = stoi(date.substr(8,2));
-            // cout << (day + int(2.6*month-0.2) - 2*century + year + year/4 + century/4)%7;
+            // cout << "day: " << (day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 << "\n";
 
             if (org == "Sprey"){
                 if (month > 3 && month < 11){
@@ -175,25 +177,25 @@ int main() {
                 
                 if (people[i] == "Sprey"){
                     if (month > 3 && month < 11){
-                        usertime--;
+                        usertime++;
                     }
                     else if (month == 3){
                         if (day > startSprey){
-                            usertime--;
+                            usertime++;
                         }
                         else if (day == startSprey){
                             if (stoi(time.substr(0,2)) >= 2){
-                                usertime--;
+                                usertime++;
                             }
                         }
                     }
                     else if (month == 11){
                         if (day < endSprey){
-                            usertime--;
+                            usertime++;
                         }
                         else if (day == endSprey){
                             if (stoi(time.substr(0,2)) < 2){
-                                usertime--;
+                                usertime++;
                             }
                         }
                     }
@@ -201,57 +203,58 @@ int main() {
 
                 else if (people[i] == "Anderson"){
                     if (month > 3 && month < 10){
-                        usertime--;
+                        usertime++;
                     }
                     else if (month == 3){
                         if (day > startAnderson){
-                            usertime--;
+                            usertime++;
                         }
                         else if (day == startAnderson){
                             if (stoi(time.substr(0,2)) >= 1){
-                                usertime--;
+                                usertime++;
                             }
                         }
                     }
                     else if (month == 10){
                         if (day < endAnderson){
-                            usertime--;
+                            usertime++;
                         }
                         else if (day == endAnderson){
                             if (stoi(time.substr(0,2)) < 2){
-                                usertime--;
+                                usertime++;
                             }
                         }
                     }
                 }
 
                 else if (people[i] == "Thomas"){
-                    if (month < 4 && month > 10){
-                        usertime--;
+                    if (month < 4 || month > 10){
+                        usertime++;
                     }
                     else if (month == 4){
                         if (day < endThomas){
-                            usertime--;
+                            usertime++;
                         }
                         else if (day == endThomas){
                             if (stoi(time.substr(0,2)) < 3){
-                                usertime--;
+                                usertime++;
                             }
                         }
                     }
                     else if (month == 10){
                         if (day > startThomas){
-                            usertime--;
+                            usertime++;
                         }
                         else if (day == startThomas){
                             if (stoi(time.substr(0,2)) >= 2){
-                                usertime--;
+                                usertime++;
                             }
                         }
                     }
                 }
+                //map of amount of days in each month
                 map<int, int> MonthDays = {{1,31},{2,28},{3,31},{4,30},{5,31},{6,30},{7,31},{8,31},{9,30},{10,31},{11,30},{12,31}};  
-                if (usertime > 24){
+                if (usertime >= 24){
                     usertime -= 24;
                     day++;
                     if (day > MonthDays[month]){
@@ -263,6 +266,11 @@ int main() {
                         }
                     }
                 }
+                if (usertime - int(usertime) > .59){
+                    usertime++;
+                    usertime -= .60;
+                }
+
                 string susertime = to_string(usertime);
                 if (susertime[1] ==  '.'){
                     susertime = "0" + susertime;
@@ -275,8 +283,12 @@ int main() {
                 if (smonth.length() == 1){
                     smonth = "0" + smonth;
                 }
+                string syear = to_string(year);
+                if (syear.length() == 1){
+                    syear = "0" + syear;
+                }
                 susertime = susertime.substr(0,2) + ":" + susertime.substr(3,2);
-                cout << people[i] << " " << year << '-' << smonth << '-' << sday << " " << susertime << "\n";
+                cout << people[i] << " " << syear << '-' << smonth << '-' << sday << " " << susertime << "\n";
             }
         }
 
