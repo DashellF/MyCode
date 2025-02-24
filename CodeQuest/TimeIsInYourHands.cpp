@@ -171,7 +171,7 @@ int main() {
                 }
             }
 
-            cout << org << "\'s meeting:\n";
+            cout << org << "\'s Meeting:\n";
             for (int i = 0; i < people.size(); i++){
                 double usertime = UTC + times[people[i]];
                 
@@ -263,6 +263,10 @@ int main() {
                         if (month > 12){
                             year++;
                             month = 1;
+                            if (year > 100){
+                                century++;
+                                year = 0;
+                            }
                         }
                     }
                 }
@@ -287,8 +291,12 @@ int main() {
                 if (syear.length() == 1){
                     syear = "0" + syear;
                 }
+                string scentury = to_string(century);
+                if (scentury.length() == 1){
+                    scentury = "0" + scentury;
+                }
                 susertime = susertime.substr(0,2) + ":" + susertime.substr(3,2);
-                cout << people[i] << " " << syear << '-' << smonth << '-' << sday << " " << susertime << "\n";
+                cout << people[i] << " " << scentury << syear << '-' << smonth << '-' << sday << " " << susertime << "\n";
             }
         }
 
