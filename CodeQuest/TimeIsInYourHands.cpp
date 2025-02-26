@@ -38,7 +38,7 @@ int main() {
             year = year % 100;
             int startSprey, endSprey, startAnderson, endAnderson, startThomas, endThomas;
             for (int i = 0; i < 31; i++){
-                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 1){
                     startSprey = day + 7;
                     break;
                 }
@@ -46,7 +46,7 @@ int main() {
             }
             day = 31;
             for (int i = 0; i < 31; i++){
-                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 1){
                     startAnderson = day;
                     break;
                 }
@@ -55,7 +55,7 @@ int main() {
             month = 10;
             day = 1;
             for (int i = 0; i < 31; i++){
-                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 1){
                     startThomas = day;
                     break;
                 }
@@ -63,7 +63,7 @@ int main() {
             } 
             day = 31;
             for (int i = 0; i < 31; i++){
-                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 1){
                     endAnderson = day;
                     break;
                 }
@@ -72,7 +72,7 @@ int main() {
             month = 11;
             day = 31;
             for (int i = 0; i < 31; i++){
-                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 1){
                     endSprey = day;
                     break;
                 }
@@ -81,7 +81,7 @@ int main() {
             month = 4;
             day = 1;
             for (int i = 0; i < 31; i++){
-                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 0){
+                if ((day + (13 * (month + 1)) / 5 + year + year/4 + century/4 + 5*century)%7 == 1){
                     endThomas = day;
                     break;
                 }
