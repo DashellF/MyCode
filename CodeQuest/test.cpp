@@ -19,7 +19,7 @@ int main() {
             getline(cin, line);
             string left = solve(line.substr(0,line.find("=")));
             string right = line.substr(line.find("=")+1);
-            if (stod(left) == stod(right)){
+            if (left == right){
                 cout << "VALID" << "\n";
             }
             else {
@@ -41,39 +41,39 @@ string solve(string eq){
     }
     else if (eq.find("SQRT") != string::npos){
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("SQRT") + 4));
-        return solve(eq.substr(0,eq.find("SQRT")) + to_string(sqrt(AnumAfter.first)) + eq.substr(eq.find("SQRT") + 4 + AnumAfter.second));
+        return solve(eq.substr(0,eq.find("SQRT")) + to_string(sqrt(AnumAfter.first)) + eq.substr(eq.find("SQRT") + 4 + AnumAfter.second + 1));
     }
     else if (eq.find("^") != string::npos){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("^")));
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("^") + 1));
-        return solve(eq.substr(0,eq.find("^") - AnumBefore.second) + to_string(pow(AnumBefore.first, AnumAfter.first)) + eq.substr(eq.find("^") + 1 + AnumAfter.second));
+        return solve(eq.substr(0,eq.find("^") - AnumBefore.second - 1) + to_string(pow(AnumBefore.first, AnumAfter.first)) + eq.substr(eq.find("^") + 1 + AnumAfter.second + 1));
     }
     else if (eq.find("/") != string::npos){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("/")));
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("/") + 1));
-        return solve(eq.substr(0,eq.find("/") - AnumBefore.second) + to_string(AnumBefore.first / AnumAfter.first) + eq.substr(eq.find("/") + 1 + AnumAfter.second));
+        return solve(eq.substr(0,eq.find("/") - AnumBefore.second - 1) + to_string(AnumBefore.first / AnumAfter.first) + eq.substr(eq.find("/") + 1 + AnumAfter.second + 1));
     }
     else if (eq.find("*") != string::npos){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("*")));
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("*") + 1));
-        return solve(eq.substr(0,eq.find("*") - AnumBefore.second) + to_string(AnumBefore.first * AnumAfter.first) + eq.substr(eq.find("*") + 1 + AnumAfter.second));
+        return solve(eq.substr(0,eq.find("*") - AnumBefore.second - 1) + to_string(AnumBefore.first * AnumAfter.first) + eq.substr(eq.find("*") + 1 + AnumAfter.second + 1));
     }
     else if (eq.find("+") != string::npos){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("+")));
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("+") + 1));
-        return solve(eq.substr(0,eq.find("+") - AnumBefore.second) + to_string((AnumBefore.first + AnumAfter.first)) + eq.substr(eq.find("+") + 1 + AnumAfter.second));
+        return solve(eq.substr(0,eq.find("+") - AnumBefore.second - 1) + to_string(AnumBefore.first + AnumAfter.first) + eq.substr(eq.find("+") + 1 + AnumAfter.second + 1));
     }
     else if (eq.find("-") != string::npos && eq.find("-") != 0){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("-")));
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("-") + 1));
-        return solve(eq.substr(0,eq.find("-") - AnumBefore.second) + to_string(AnumBefore.first - AnumAfter.first) + eq.substr(eq.find("-") + 1 + AnumAfter.second + 1));
+        return solve(eq.substr(0,eq.find("-") - AnumBefore.second - 1) + to_string(AnumBefore.first - AnumAfter.first) + eq.substr(eq.find("-") + 1 + AnumAfter.second + 1));
     }
     else {
         return eq;
     }
 }
 
-pair<double, int> numBefore(string eq){
+pair<double, int> NumBefore(string eq){
     string output;
     int length = 0;
     for (int i = eq.length()-1; i >= 0; i--){
@@ -93,7 +93,7 @@ pair<double, int> numBefore(string eq){
     return {stod(output), length};
 }
 
-pair<double, int> numAfter(string eq){
+pair<double, int> NumAfter(string eq){
     string output;
     int length = 0;
     for (int i = 0; i < eq.length(); i++){
