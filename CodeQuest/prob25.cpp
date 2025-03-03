@@ -41,22 +41,22 @@ string solve(string eq){
     }
     else if (eq.find("SQRT") != string::npos){
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("SQRT") + 4));
-        return solve(eq.substr(0,eq.find("SQRT")) + to_string(sqrt(AnumAfter.first)) + eq.substr(eq.find("SQRT") + 4 + AnumAfter.second));
+        return solve(eq.substr(0,eq.find("SQRT")) + to_string((sqrt(AnumAfter.first))) + eq.substr(eq.find("SQRT") + 4 + AnumAfter.second));
     }
     else if (eq.find("^") != string::npos){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("^")));
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("^") + 1));
-        return solve(eq.substr(0,eq.find("^") - AnumBefore.second) + to_string(pow(AnumBefore.first, AnumAfter.first)) + eq.substr(eq.find("^") + 1 + AnumAfter.second));
+        return solve(eq.substr(0,eq.find("^") - AnumBefore.second) + to_string((pow(AnumBefore.first, AnumAfter.first))) + eq.substr(eq.find("^") + 1 + AnumAfter.second));
     }
     else if (eq.find("/") != string::npos){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("/")));
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("/") + 1));
-        return solve(eq.substr(0,eq.find("/") - AnumBefore.second) + to_string(AnumBefore.first / AnumAfter.first) + eq.substr(eq.find("/") + 1 + AnumAfter.second));
+        return solve(eq.substr(0,eq.find("/") - AnumBefore.second) + to_string((AnumBefore.first / AnumAfter.first)) + eq.substr(eq.find("/") + 1 + AnumAfter.second));
     }
     else if (eq.find("*") != string::npos){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("*")));
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("*") + 1));
-        return solve(eq.substr(0,eq.find("*") - AnumBefore.second) + to_string(AnumBefore.first * AnumAfter.first) + eq.substr(eq.find("*") + 1 + AnumAfter.second));
+        return solve(eq.substr(0,eq.find("*") - AnumBefore.second) + to_string((AnumBefore.first * AnumAfter.first)) + eq.substr(eq.find("*") + 1 + AnumAfter.second));
     }
     else if (eq.find("+") != string::npos){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("+")));
@@ -66,7 +66,7 @@ string solve(string eq){
     else if (eq.find("-") != string::npos && eq.find("-") != 0){
         pair<double, int> AnumBefore = numBefore(eq.substr(0,eq.find("-")));
         pair<double, int> AnumAfter = numAfter(eq.substr(eq.find("-") + 1));
-        return solve(eq.substr(0,eq.find("-") - AnumBefore.second) + to_string(AnumBefore.first - AnumAfter.first) + eq.substr(eq.find("-") + 1 + AnumAfter.second + 1));
+        return solve(eq.substr(0,eq.find("-") - AnumBefore.second) + to_string((AnumBefore.first - AnumAfter.first)) + eq.substr(eq.find("-") + 1 + AnumAfter.second + 1));
     }
     else {
         return eq;
@@ -98,11 +98,11 @@ pair<double, int> numAfter(string eq){
     int length = 0;
     for (int i = 0; i < eq.length(); i++){
         if (isdigit(eq[i]) || eq[i] == '.'){
-            output = eq[i];
+            output += eq[i];
             length++;
         }
         else if (i == 0 && eq[i] == '-'){
-            output = eq[i];
+            output += eq[i];
             length++;
         }
         else {
