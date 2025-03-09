@@ -8,16 +8,18 @@ int main() {
         cin.tie(NULL);
 
         int n = 33;
+        string output = "";
         for (int q = 0; q < n; q++) {
             string line;
             getline(cin,line);
             string code =  "I WILL NOT BE SNEAKY";
-            string output;
-            for 
-                
-                "I WILL NOT BE SNEAKY"){
+            for (int i = 0; i < code.length(); i++){
+                if (line[i] != code[i]){
+                output += line[i];
+                }
             }
         }
+        cout << output << "\n";
 
         return 0;
 }
